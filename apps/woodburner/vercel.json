@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "cd ../.. && npx turbo run build --filter=getthewoodburneron",
+  "buildCommand": "cd ../.. && npm run build --workspace=@weather-apps/ai-services && npx turbo run build --filter=getthewoodburneron",
   "outputDirectory": "dist",
   "installCommand": "npm install --prefix=../..",
   "cleanUrls": false,

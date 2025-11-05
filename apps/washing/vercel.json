@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd ../.. && npx turbo run build --filter=getthewashingout",
+  "buildCommand": "cd ../.. && npm run build --workspace=@weather-apps/ai-services && npx turbo run build --filter=getthewashingout",
   "installCommand": "npm install --prefix=../..",
   "outputDirectory": "dist",
   "framework": "vite",
