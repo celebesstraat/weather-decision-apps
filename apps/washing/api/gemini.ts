@@ -65,15 +65,24 @@ function validateInput(body: any): { valid: boolean; error?: string; sanitized?:
     return { valid: false, error: 'Request body is required' };
   }
 
-  const { type, weatherData, location, maxTokens } = body;
+  const { type, weatherData, location, maxTokens, prompt } = body;
 
   // Validate type
-  const validTypes = ['comprehensive-advice', 'location-validation', 'place-name'];
+  const validTypes = ['comprehensive-advice', 'location-validation', 'place-name', 'custom-prompt'];
   if (!type || !validTypes.includes(type)) {
     return { valid: false, error: `Invalid type. Must be one of: ${validTypes.join(', ')}` };
   }
 
   // Type-specific validation
+  if (type === 'custom-prompt') {
+    if (!prompt || typeof prompt !== 'string') {
+      return { valid: false, error: 'Prompt is required and must be a string for custom-prompt' };
+    }
+    if (prompt.length > 10000) {
+      return { valid: false, error: 'Prompt must be 10000 characters or less' };
+    }
+  }
+
   if (type === 'comprehensive-advice') {
     if (!weatherData) {
       return { valid: false, error: 'weatherData is required for comprehensive-advice' };
@@ -180,14 +189,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Generate prompt based on type
     const { type } = validation.sanitized;
-    let prompt: string;
+    let promptText: string;
 
-    if (type === 'comprehensive-advice') {
-      prompt = generateComprehensiveAdvicePrompt(validation.sanitized);
+    if (type === 'custom-prompt') {
+      promptText = validation.sanitized.prompt;
+    } else if (type === 'comprehensive-advice') {
+      promptText = generateComprehensiveAdvicePrompt(validation.sanitized);
     } else if (type === 'location-validation') {
-      prompt = generateLocationValidationPrompt(validation.sanitized.input);
+      promptText = generateLocationValidationPrompt(validation.sanitized.input);
     } else if (type === 'place-name') {
-      prompt = generatePlaceNamePrompt(validation.sanitized.latitude, validation.sanitized.longitude);
+      promptText = generatePlaceNamePrompt(validation.sanitized.latitude, validation.sanitized.longitude);
     } else {
       return res.status(400).json({ error: 'Invalid request type' });
     }
@@ -195,7 +206,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Call Gemini API
     const result = await genAI.models.generateContent({
       model: 'gemini-2.5-flash-lite',
-      contents: prompt,
+      contents: promptText,
       generationConfig: {
         temperature: 0.4,
         maxOutputTokens: validation.sanitized.maxTokens || 2048,
