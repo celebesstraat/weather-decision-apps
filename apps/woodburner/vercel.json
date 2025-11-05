@@ -1,7 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
+  "buildCommand": "cd ../.. && npx turbo run build --filter=getthewoodburneron",
   "outputDirectory": "dist",
+  "installCommand": "npm install --prefix=../..",
   "cleanUrls": false,
   "trailingSlash": false,
   "headers": [

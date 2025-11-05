@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
+  "buildCommand": "cd ../.. && npx turbo run build --filter=getthewashingout",
+  "installCommand": "npm install --prefix=../..",
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
