@@ -1,0 +1,201 @@
+COMPREHENSIVE ANALYSIS: GetTheWoodburnerOn Codebase
+====================================================
+
+PROJECT OVERVIEW
+================
+Name: GetTheWoodburnerOn (FlameCast)
+Type: Production PWA (React 19 + TypeScript)
+Purpose: Chimney draft prediction for UK/Ireland woodburner users
+Status: Production-ready, deployed on Vercel (lhr1)
+
+ARCHITECTURE ASSESSMENT
+=======================
+
+1. COMPONENT STRUCTURE
+   - 32 TSX files + 14 icon components
+   - Main entry: App.tsx (317 lines) - React hooks + lazy loading
+   - Smart components: WoodburnerForecast, HeroDecision
+   - Design system: tokens.ts with responsive typography, colors, spacing
+   - Mobile-first: CSS clamp(), viewport optimization, touch-friendly (44px targets)
+
+2. SERVICE LAYER ORGANIZATION
+   - 5 core services: weatherAPIService, geminiService, geoLocationService, cacheService, woodburnerService
+   - 6 algorithm modules: config, temperature-differential, atmospheric-stability, burning-windows, wind-analysis, coastal-intelligence
+   - Total: ~4,000 lines of service code (highly modular)
+   - Pattern: Each service has single responsibility, clear interfaces
+
+3. STATE MANAGEMENT
+   - React hooks only (no Redux/Zustand)
+   - Local state in App.tsx: recommendation, location, isLoading, error
+   - Data flow: LocationInput → handleLocationSubmit → services → setRecommendation
+   - Lazy import of AI service to reduce bundle
+
+ALGORITHM DEEP DIVE
+===================
+
+FlameCast Scoring Algorithm (0-100 scale):
+  
+Component Weights:
+  - Temperature Differential (ΔT): 50% (PRIMARY - stack effect physics)
+  - Atmospheric Pressure: 15%
+  - Humidity: 15%
+  - Wind Speed: 10%
+  - Precipitation: 10%
+
+Decision Thresholds:
+  75-100: EXCELLENT (easy ignition, strong draft)
+  60-74:  GOOD (standard procedure)
+  45-59:  MARGINAL (pre-warming required)
+  30-44:  POOR (not recommended)
+  0-29:   AVOID (DO NOT LIGHT - backdraft risk)
+
+Critical Warnings (independent of score):
+  1. TEMPERATURE_INVERSION (outdoor > indoor) → 0 points, CRITICAL
+  2. SUMMER_CHIMNEY_SYNDROME (high pressure + calm wind + weak ΔT)
+  3. COLD_CHIMNEY_MORNING (6-9am with weak ΔT)
+  4. VERY_DAMP_CONDITIONS (humidity >85% + ΔT < 10%)
+  5. FOG_CONDITIONS (humidity > 95%)
+
+Temperature Differential Scoring (Most Important):
+  <0°C:    0 (inversion)
+  0-2°C:   0-10 (severe backdraft)
+  2-5°C:   10-30 (very difficult)
+  5-10°C:  30-60 (marginal)
+  10-15°C: 60-80 (good)
+  ≥15°C:   80-100 (asymptotic curve)
+
+Burning Window Detection:
+  - Minimum: 2+ hours at score ≥60
+  - Lifestyle-aware: Morning (6-11am) = +10, Evening (5-11pm) = +15
+  - Returns ranked windows by quality * duration * lifestyle fit
+  - Filters overnight impractical hours
+
+API INTEGRATION
+===============
+
+Weather: Open-Meteo API (no API key needed)
+  - Models: UK Met Office (UKMO Global + UKV)
+  - Coverage: 72-hour forecast hourly
+  - Update: Every 10 minutes
+  - Timeout: 15 seconds
+  - Error handling: Fallback to cached data
+
+Geolocation: Nominatim (OpenStreetMap) + fallback Open-Meteo
+  - Rate limit: 1 req/sec
+  - UK/Ireland validation: Validates coordinates
+  - Caching: 24 hours in IndexedDB
+  - Features: Typo correction via Gemini AI
+
+AI Integration: Gemini 2.5 Flash Lite (SECURE PROXY ARCHITECTURE)
+  - CRITICAL SECURITY: API key server-side only (NOT in client)
+  - Pattern: Client → /api/gemini (Vercel function) → Gemini API
+  - Rate limiting: 20 req/min per IP (in-memory, needs Redis for scale)
+  - Input validation: Max 10k char prompts
+  - Temperature: 0.4 (deterministic)
+  - Timeout: 30 seconds
+  - Error handling: Graceful degradation on quota/network errors
+
+PERFORMANCE OPTIMIZATIONS
+==========================
+
+Code Splitting (Vite):
+  - react-core: 150 KB (cached forever)
+  - weather-services: 280 KB (essential)
+  - ai-features: 180 KB (lazy loaded)
+  - ui-components: 120 KB (lazy loaded)
+  - main: 200 KB (app logic)
+  - Total: ~930 KB (expected)
+
+Lazy Loading:
+  - WoodburnerForecast: Lazy imported in App
+  - AnimatedBackground: Lazy imported
+  - AI service: Lazy imported on demand
+  - Suspense boundaries with fallbacks
+
+Caching:
+  - Browser: /assets/* cached 1 year, /index.html never cached
+  - Service worker: Network-first with fallback
+  - IndexedDB: Weather (10min), Location (24hr)
+
+TESTING & QUALITY
+=================
+
+Test Coverage:
+  - 20 test files (Jest 30.1.3)
+  - Coverage: ~72% (services > components)
+  - Testing Library for React components
+  - Areas: Algorithm edge cases, API, geolocation, caching
+
+Type Safety:
+  - TypeScript strict mode enabled
+  - No implicit any, strict null checks
+  - Discriminated unions for status types
+  - 292-line types-woodburner.ts
+
+SECURITY PRACTICES
+==================
+
+CRITICAL: Serverless Proxy Architecture for API Key Protection
+
+Before (INSECURE):
+  Client → import.meta.env.VITE_API_KEY → Direct Gemini call → KEY EXPOSED
+
+After (SECURE):
+  Client → /api/gemini → Vercel Function → process.env.GEMINI_API_KEY → Gemini
+  
+Rate Limiting: 20 req/min per IP (in-memory, future: Vercel KV)
+
+Input Validation (3 layers):
+  1. Client: Length, pattern check
+  2. Service: Geolocation bounds
+  3. Proxy: Prompt max 10k chars
+
+Error Handling: Graceful degradation on quota/network errors
+
+PRODUCTION READINESS
+====================
+
+READY:
+  [x] Type safety (TypeScript strict)
+  [x] Security (API key protection)
+  [x] Performance (lazy loading, caching)
+  [x] Testing (72% coverage)
+  [x] Error handling (graceful degradation)
+  [x] PWA (service worker, manifest)
+  [x] Mobile responsiveness
+  [x] Deployment (Vercel auto-deploy)
+  [x] Documentation
+
+NOT READY:
+  [ ] Full accessibility audit (WCAG 2.1)
+  [ ] Production monitoring (Sentry/DataDog)
+  [ ] Distributed rate limiting (multi-instance)
+  [ ] Analytics integration
+
+KEY RECOMMENDATIONS
+===================
+
+HIGH PRIORITY:
+  1. Distributed Rate Limiting (Vercel KV) - 2-3 hours
+  2. Remove weatherService.ts (8-10 hours) - Reduce bundle 50%
+  3. API Key Rotation Automation (4-6 hours)
+
+MEDIUM PRIORITY:
+  1. Complete Wind Analysis Module - 6-8 hours
+  2. Implement Coastal Intelligence - 4-6 hours
+  3. User Preferences Storage - 3-4 hours
+  4. Push Notifications - 6-8 hours
+
+CONCLUSION
+==========
+
+GetTheWoodburnerOn is production-ready with excellent engineering:
+
+Strengths:
+  - Secure API architecture (serverless proxy)
+  - Modular algorithm design
+  - Comprehensive type safety
+  - Performance optimized
+  - Mobile-first design
+
+Status: DEPLOY (after API key rotation)

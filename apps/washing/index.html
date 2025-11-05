@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    
+    <!-- Enhanced Viewport for Mobile PWA Optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover, shrink-to-fit=no" />
+    
+    <!-- Primary Meta Tags -->
+    <title>GetTheWashingOut - Laundry Weather Assistant</title>
+    <meta name="title" content="GetTheWashingOut - Laundry Weather Assistant" />
+    <meta name="description" content="Your AI-powered laundry weather assistant. Know when it's perfect for drying clothes outside with Gusty McGhee!" />
+    <meta name="keywords" content="weather, laundry, drying, clothes, AI, assistant, washing, forecast" />
+    <meta name="author" content="GetTheWashingOut" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192x192.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-72x72.png" />
+    <link rel="shortcut icon" href="/icons/icon-96x96.png" />
+    
+    <!-- iOS Status Bar -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="GetTheWashingOut" />
+    
+    <!-- Android Chrome -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#0ea5e9" />
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileColor" content="#0ea5e9" />
+    <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/icons/icon-72x72.png" />
+    <meta name="msapplication-square150x150logo" content="/icons/icon-152x152.png" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://getthewashingout.app/" />
+    <meta property="og:title" content="GetTheWashingOut - Laundry Weather Assistant" />
+    <meta property="og:description" content="Your AI-powered laundry weather assistant. Know when it's perfect for drying clothes outside!" />
+    <meta property="og:image" content="/icons/icon-512x512.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="GetTheWashingOut - Laundry Weather Assistant" />
+    <meta property="twitter:description" content="Your AI-powered laundry weather assistant. Know when it's perfect for drying clothes outside!" />
+    <meta property="twitter:image" content="/icons/icon-512x512.png" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Prevent zoom on input focus (iOS) -->
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+    
+    <!-- Viewport Height Calculation for PWA -->
+    <script>
+      // Calculate and set CSS custom property for actual viewport height
+      function setViewportHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+      }
+      
+      // Set on load and resize
+      setViewportHeight();
+      window.addEventListener('resize', setViewportHeight);
+      window.addEventListener('orientationchange', () => {
+        setTimeout(setViewportHeight, 100);
+      });
+    </script>
+  </body>
+</html>

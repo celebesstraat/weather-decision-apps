@@ -1,0 +1,55 @@
+{
+  "name": "@weather-apps/weather-api",
+  "version": "1.0.0",
+  "description": "Weather data fetching and caching service for weather decision apps",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/types.js",
+      "default": "./dist/types.js"
+    },
+    "./providers": {
+      "types": "./dist/providers/index.d.ts",
+      "import": "./dist/providers/index.js",
+      "default": "./dist/providers/index.js"
+    },
+    "./cache": {
+      "types": "./dist/cache/index.d.ts",
+      "import": "./dist/cache/index.js",
+      "default": "./dist/cache/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "jest": "^30.2.0",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "weather",
+    "api",
+    "forecast",
+    "open-meteo",
+    "cache"
+  ],
+  "author": "steel + Claude Code",
+  "license": "MIT"
+}

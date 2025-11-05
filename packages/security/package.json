@@ -1,0 +1,36 @@
+{
+  "name": "@weather-apps/security",
+  "version": "1.0.0",
+  "description": "Security utilities for weather-decision apps (rate limiting, input validation, sanitization)",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./rate-limiting": "./dist/rate-limiting/index.js",
+    "./validation": "./dist/validation/index.js",
+    "./sanitization": "./dist/sanitization/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.2",
+    "jest": "^29.7.0",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "security",
+    "rate-limiting",
+    "validation",
+    "sanitization",
+    "xss",
+    "sql-injection"
+  ],
+  "author": "steel + Claude Code",
+  "license": "MIT"
+}

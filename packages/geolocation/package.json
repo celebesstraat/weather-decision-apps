@@ -1,0 +1,39 @@
+{
+  "name": "@weather-apps/geolocation",
+  "version": "1.0.0",
+  "description": "Geolocation services for weather decision apps (Nominatim, browser geolocation, UK/Ireland validation)",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./providers": "./dist/providers/index.js",
+    "./validation": "./dist/validation/index.js",
+    "./types": "./dist/types.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.2",
+    "jest": "^29.7.0",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "geolocation",
+    "geocoding",
+    "nominatim",
+    "openstreetmap",
+    "uk",
+    "ireland",
+    "location",
+    "validation",
+    "weather"
+  ],
+  "author": "steel + Claude Code",
+  "license": "MIT"
+}

@@ -1,0 +1,1686 @@
+/* Tailwind CSS base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS custom properties for consistent theming */
+:root {
+    --primary-text: #1f2937;
+    --secondary-text: #64748b;
+    --bg-primary: rgba(255, 255, 255, 0.1);
+    --bg-secondary: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(255, 255, 255, 0.2);
+    
+    /* New color palette for playful UI */
+    --color-sky-blue: #4A90E2;
+    --color-nature-green: #4CAF50;
+    --color-warm-amber: #FFC107;
+    --color-soft-coral: #FF7043;
+    --color-charcoal: #2C3E50;
+    
+    /* Typography */
+    --font-headings: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Default font family updates */
+body {
+    font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headings);
+}
+
+/* Custom Scrollbar Styling for Modern UI */
+/* For Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F1F5F9;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0EA5E9;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0284C7;
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #0EA5E9 #F1F5F9;
+}
+
+/* Smooth scrolling for all elements */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Horizontal scroll container optimizations */
+.snap-x {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.snap-start {
+    scroll-snap-align: start;
+}
+
+/* Touch-friendly button sizing */
+button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+}
+
+/* Prevent text selection on interactive elements */
+button, [role="button"], .cursor-pointer {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile-First Responsive Design */
+
+/* All mobile devices */
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 14px; /* Base font size for mobile */
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Container fixes */
+    .max-w-3xl, .max-w-xl, .max-w-lg {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    
+    /* Reduce all padding for mobile */
+    .px-4 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    
+    .py-8 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    .p-6, .p-8 {
+        padding: 1rem !important;
+    }
+    
+    /* Header adjustments for mobile */
+    header {
+        margin-bottom: 1rem !important;
+    }
+    
+    header h1 {
+        font-size: 1.5rem !important;
+        line-height: 2rem !important;
+        text-align: center;
+    }
+    
+    /* Layout adjustments */
+    header .flex.items-center.gap-6 {
+        gap: 0.5rem !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    /* Weather icons smaller on mobile */
+    header svg {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    /* Text size fixes */
+    .text-5xl {
+        font-size: 2rem !important;
+        line-height: 2.25rem !important;
+    }
+    
+    .text-3xl {
+        font-size: 1.5rem !important;
+        line-height: 1.75rem !important;
+    }
+    
+    .text-2xl {
+        font-size: 1.25rem !important;
+        line-height: 1.5rem !important;
+    }
+    
+    .text-xl {
+        font-size: 1.125rem !important;
+        line-height: 1.375rem !important;
+    }
+    
+    .text-lg {
+        font-size: 1rem !important;
+        line-height: 1.25rem !important;
+    }
+    
+    /* Button fixes */
+    button, .btn, [role="button"] {
+        min-height: 44px !important;
+        font-size: 0.875rem !important;
+        padding: 0.75rem !important;
+    }
+    
+    /* Input fixes */
+    input, select, textarea {
+        font-size: 16px !important; /* Prevent zoom on iOS */
+        min-height: 44px !important;
+    }
+}
+
+/* Very small mobile devices */
+@media screen and (max-width: 390px) {
+    html {
+        font-size: 13px !important; /* Even smaller base font */
+    }
+    
+    /* Reduce margins and padding even more */
+    .px-4 {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    .max-w-3xl, .max-w-xl, .max-w-lg {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    /* Smaller text for very small screens */
+    header h1 {
+        font-size: 1.25rem !important;
+        line-height: 1.5rem !important;
+    }
+    
+    .text-5xl {
+        font-size: 1.75rem !important;
+        line-height: 2rem !important;
+    }
+    
+    .text-3xl {
+        font-size: 1.25rem !important;
+        line-height: 1.5rem !important;
+    }
+    
+    .text-2xl {
+        font-size: 1.125rem !important;
+        line-height: 1.375rem !important;
+    }
+    
+    .text-xl {
+        font-size: 1rem !important;
+        line-height: 1.25rem !important;
+    }
+}
+
+/* Ultra-narrow screens (iPhone SE, small Android) */
+@media screen and (max-width: 320px) {
+    .p-8 {
+        padding: 1rem !important;
+    }
+    
+    .p-6 {
+        padding: 1rem !important;
+    }
+    
+    .text-5xl {
+        font-size: 1.875rem !important;
+        line-height: 2.25rem !important;
+    }
+    
+    .gap-6 {
+        gap: 0.5rem !important;
+    }
+    
+    /* Stack header items vertically on very small screens */
+    header .flex.items-center.gap-6 {
+        flex-direction: column;
+        gap: 1rem !important;
+    }
+}
+
+/* Safe Area Insets for devices with notches/dynamic islands */
+@supports (padding-top: env(safe-area-inset-top)) {
+    body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+    
+    .min-h-screen {
+        min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    }
+}
+
+/* PWA specific styles */
+@media (display-mode: standalone) {
+    /* Hide browser UI elements when installed as PWA */
+    html, body {
+        height: 100vh !important;
+        height: calc(var(--vh, 1vh) * 100) !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        user-select: none; /* Prevent text selection in PWA mode */
+        -webkit-user-select: none;
+        -webkit-touch-callout: none; /* Disable callout on iOS */
+    }
+    
+    /* Force root element to cover full viewport */
+    #root {
+        height: 100vh !important;
+        height: calc(var(--vh, 1vh) * 100) !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    
+    /* Add subtle app-like shadow to main content */
+    main {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 0; /* Remove border radius in PWA mode */
+        min-height: calc(100vh - 80px); /* Account for footer */
+        min-height: calc(calc(var(--vh, 1vh) * 100) - 80px);
+    }
+    
+    /* Ensure footer stays at bottom */
+    footer {
+        position: sticky;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets for mobile */
+    button, .btn, [role="button"] {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        padding: 0.75rem 1rem !important;
+    }
+    
+    /* Improve input fields for touch */
+    input, select, textarea {
+        min-height: 44px !important;
+        padding: 0.75rem !important;
+        border-radius: 0.5rem !important;
+        font-size: 16px !important; /* Prevent zoom on iOS */
+    }
+    
+    /* Card hover effects don't work on mobile, so remove them */
+    .bg-white\/90:hover {
+        transform: none !important;
+    }
+}
+
+/* High DPI / Retina display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    /* Ensure crisp rendering on high DPI displays */
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Optimize images for retina */
+    img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+
+    /* Prevent zoom on input focus (iOS) */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Accessibility improvements for mobile */
+@media (prefers-reduced-motion: reduce) {
+    .animate-bounce-gentle,
+    .animate-sway,
+    .animate-huddle,
+    .animate-bounce,
+    .animate-pulse,
+    .animate-spin-slow,
+    .animate-float,
+    .animate-float-delayed,
+    .animate-float-slow,
+    .animate-rain,
+    .animate-ping {
+        animation: none !important;
+    }
+}
+
+/* Dark mode support for mobile devices */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-text: #f1f5f9;
+        --secondary-text: #cbd5e1;
+        --bg-primary: rgba(0, 0, 0, 0.1);
+        --bg-secondary: rgba(0, 0, 0, 0.05);
+        --border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    body {
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        color: var(--primary-text);
+    }
+    
+    .bg-white\/90 {
+        background: rgba(45, 55, 72, 0.9) !important;
+        color: var(--primary-text);
+    }
+    
+    .text-slate-800 {
+        color: var(--primary-text) !important;
+    }
+    
+    .text-slate-700 {
+        color: var(--secondary-text) !important;
+    }
+}
+
+/* Android/Pixel specific optimizations */
+@media screen and (max-width: 428px) {
+    /* Force full viewport coverage on Android PWA */
+    @media (display-mode: standalone) {
+        html, body, #root {
+            /* Handle Android navigation bar space */
+            height: 100vh !important;
+            height: calc(var(--vh, 1vh) * 100) !important;
+            min-height: 100vh !important;
+            min-height: calc(var(--vh, 1vh) * 100) !important;
+        }
+        
+        /* Ensure content fills screen properly */
+        .min-h-screen {
+            min-height: 100vh !important;
+            min-height: calc(var(--vh, 1vh) * 100) !important;
+            height: 100vh !important;
+            height: calc(var(--vh, 1vh) * 100) !important;
+        }
+        
+        /* Adjust main content area */
+        main {
+            min-height: calc(100vh - 60px) !important;
+            min-height: calc(calc(var(--vh, 1vh) * 100) - 60px) !important;
+            padding-bottom: 2rem !important;
+        }
+        
+        /* Compact footer for mobile PWA */
+        footer {
+            padding: 0.75rem !important;
+            font-size: 0.75rem !important;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+    }
+}
+
+/* Landscape orientation optimizations */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    /* Reduce vertical padding in landscape mode */
+    .py-8 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    .mb-12 {
+        margin-bottom: 2rem !important;
+    }
+    
+    /* Make header more compact in landscape */
+    header {
+        margin-bottom: 1rem !important;
+    }
+    
+    header .p-6 {
+        padding: 1rem !important;
+    }
+}
+
+/* General styles for animated background */
+.sun, .cloud, .cloth, .rain {
+    position: absolute;
+}
+
+/* Fast and Dramatic Cinematic Camera Movement Effects */
+@keyframes sunny-flyby {
+    0% { 
+        transform: scale(1) translateX(0) translateY(0) rotateZ(0deg);
+    }
+    15% { 
+        transform: scale(1.4) translateX(-60px) translateY(-30px) rotateZ(3deg);
+    }
+    30% { 
+        transform: scale(1.6) translateX(-20px) translateY(-50px) rotateZ(-1deg);
+    }
+    45% { 
+        transform: scale(1.3) translateX(40px) translateY(-20px) rotateZ(-2deg);
+    }
+    60% { 
+        transform: scale(1.1) translateX(60px) translateY(10px) rotateZ(1deg);
+    }
+    75% { 
+        transform: scale(1.2) translateX(20px) translateY(-15px) rotateZ(0deg);
+    }
+    100% { 
+        transform: scale(1) translateX(0) translateY(0) rotateZ(0deg);
+    }
+}
+
+@keyframes gentle-rain-sway {
+    0% { 
+        transform: scale(1) translateY(0) rotateX(0deg) rotateZ(0deg);
+    }
+    25% { 
+        transform: scale(1.15) translateY(-20px) rotateX(1deg) rotateZ(0.5deg);
+    }
+    50% { 
+        transform: scale(1.25) translateY(-30px) rotateX(1.5deg) rotateZ(-0.5deg);
+    }
+    75% { 
+        transform: scale(1.2) translateY(-25px) rotateX(1deg) rotateZ(1deg);
+    }
+    100% { 
+        transform: scale(1) translateY(0) rotateX(0deg) rotateZ(0deg);
+    }
+}
+
+@keyframes cloudy-sway {
+    0% { 
+        transform: scale(1) translateX(0) translateY(0) rotateY(0deg) rotateZ(0deg);
+    }
+    15% { 
+        transform: scale(1.25) translateX(-40px) translateY(-20px) rotateY(3deg) rotateZ(2deg);
+    }
+    30% { 
+        transform: scale(1.35) translateX(30px) translateY(-35px) rotateY(-2deg) rotateZ(-1deg);
+    }
+    45% { 
+        transform: scale(1.4) translateX(-15px) translateY(-45px) rotateY(1deg) rotateZ(3deg);
+    }
+    60% { 
+        transform: scale(1.2) translateX(25px) translateY(-25px) rotateY(-1deg) rotateZ(-2deg);
+    }
+    80% { 
+        transform: scale(1.15) translateX(-10px) translateY(-10px) rotateY(2deg) rotateZ(1deg);
+    }
+    100% { 
+        transform: scale(1) translateX(0) translateY(0) rotateY(0deg) rotateZ(0deg);
+    }
+}
+
+.camera-movement {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transform-style: preserve-3d;
+}
+
+/* Apply fast dramatic camera animations - noticeable within 2 seconds */
+.SunnyScene .camera-movement {
+    animation: sunny-flyby 4s ease-in-out infinite;
+}
+
+.RainyScene .camera-movement {
+    animation: gentle-rain-sway 4s ease-in-out infinite;
+}
+
+.CloudyScene .camera-movement {
+    animation: cloudy-sway 5s ease-in-out infinite;
+}
+
+/* Fast parallax depth layers for immediate motion */
+@keyframes parallax-near {
+    0%, 100% { transform: translateX(0) translateY(0) scale(1); }
+    25% { transform: translateX(-30px) translateY(-15px) scale(1.08); }
+    50% { transform: translateX(-40px) translateY(-20px) scale(1.12); }
+    75% { transform: translateX(-25px) translateY(-12px) scale(1.06); }
+}
+
+@keyframes parallax-far {
+    0%, 100% { transform: translateX(0) translateY(0) scale(1); }
+    25% { transform: translateX(20px) translateY(10px) scale(0.96); }
+    50% { transform: translateX(25px) translateY(12px) scale(0.94); }
+    75% { transform: translateX(15px) translateY(8px) scale(0.97); }
+}
+
+.parallax-near {
+    animation: parallax-near 6s ease-in-out infinite;
+}
+
+.parallax-far {
+    animation: parallax-far 8s ease-in-out infinite reverse;
+}
+
+/* --- Enhanced Sunny Scene --- */
+.sun {
+    top: 8%;
+    left: 18%;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(255, 253, 240, 0.8) 0%, rgba(255, 245, 150, 0.4) 40%, rgba(255, 253, 240, 0) 70%);
+    border-radius: 50%;
+    transform: scale(1.8);
+    opacity: 0.85;
+    filter: blur(12px);
+    animation: sun-pulse 6s ease-in-out infinite;
+}
+
+@keyframes sun-pulse {
+    0%, 100% { 
+        opacity: 0.85; 
+        transform: scale(1.8);
+    }
+    50% { 
+        opacity: 0.95; 
+        transform: scale(1.9);
+    }
+}
+
+/* Animated Sun Rays */
+.sun-rays {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 253, 240, 0.3) 30deg,
+        transparent 60deg,
+        rgba(255, 253, 240, 0.2) 90deg,
+        transparent 120deg,
+        rgba(255, 253, 240, 0.3) 150deg,
+        transparent 180deg,
+        rgba(255, 253, 240, 0.2) 210deg,
+        transparent 240deg,
+        rgba(255, 253, 240, 0.3) 270deg,
+        transparent 300deg,
+        rgba(255, 253, 240, 0.2) 330deg,
+        transparent 360deg
+    );
+    border-radius: 50%;
+    animation: sun-rays-rotate 25s linear infinite;
+    filter: blur(8px);
+}
+
+@keyframes sun-rays-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Fabric Particles in Breeze */
+.fabric-particles {
+    position: absolute;
+    inset: 0;
+}
+
+.fabric-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: fabric-float 12s ease-in-out infinite;
+}
+
+.particle-1 { top: 20%; left: 10%; animation-delay: 0s; }
+.particle-2 { top: 30%; left: 25%; animation-delay: -2s; }
+.particle-3 { top: 45%; left: 15%; animation-delay: -4s; }
+.particle-4 { top: 35%; left: 40%; animation-delay: -1s; }
+.particle-5 { top: 60%; left: 30%; animation-delay: -3s; }
+.particle-6 { top: 25%; left: 60%; animation-delay: -5s; }
+.particle-7 { top: 50%; left: 75%; animation-delay: -2.5s; }
+.particle-8 { top: 40%; left: 85%; animation-delay: -1.5s; }
+
+@keyframes fabric-float {
+    0%, 100% { 
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 0.4;
+    }
+    25% { 
+        transform: translateX(15px) translateY(-10px) scale(1.2);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: translateX(8px) translateY(5px) scale(0.9);
+        opacity: 0.6;
+    }
+    75% { 
+        transform: translateX(-5px) translateY(-8px) scale(1.1);
+        opacity: 0.7;
+    }
+}
+
+/* Enhanced Cloud Styles */
+.cloud {
+    border-radius: 50%;
+    animation: drift 80s linear infinite alternate;
+    filter: blur(10px);
+}
+
+.cloud.sunny {
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 0.6;
+}
+
+.cloud.mixed {
+    background: rgba(200, 205, 210, 0.5);
+    opacity: 0.7;
+}
+
+.cloud-1 {
+    width: 250px;
+    height: 80px;
+    top: 15%;
+    left: -10%;
+}
+
+.cloud-2 {
+    width: 350px;
+    height: 120px;
+    top: 25%;
+    left: 50%;
+    animation-duration: 95s;
+}
+
+.cloud-3 {
+    width: 200px;
+    height: 70px;
+    top: 40%;
+    left: 20%;
+    animation-duration: 110s;
+}
+
+.cloud-4 {
+    width: 300px;
+    height: 100px;
+    top: 10%;
+    left: 70%;
+    animation-duration: 120s;
+}
+
+@keyframes drift {
+    from { transform: translateX(-20vw); }
+    to { transform: translateX(100vw); }
+}
+
+/* Enhanced Washing Line with Perspective - positioned at 50% of page */
+.washing-line-container {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 300px;
+    perspective: 1000px;
+    z-index: 5;
+    transform: translateY(-50%);
+    pointer-events: none;
+    overflow: visible;
+}
+
+.washing-line {
+    position: relative;
+    width: 120%;
+    left: -10%;
+    height: 100%;
+    transform: scale(1.5);
+}
+
+.line-post {
+    position: absolute;
+    width: 12px;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(139, 69, 19, 0.8), rgba(101, 67, 33, 0.9));
+    filter: blur(1px);
+    top: -100px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.line-post.left {
+    left: 5%;
+    transform: rotateY(-5deg);
+}
+
+.line-post.right {
+    right: 5%;
+    transform: rotateY(5deg);
+}
+
+.line-wire {
+    position: absolute;
+    top: 0;
+    left: 5%;
+    right: 5%;
+    height: 6px;
+    background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+    filter: blur(0.5px);
+    animation: wire-sway 12s ease-in-out infinite;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    border-radius: 3px;
+}
+
+@keyframes wire-sway {
+    0%, 100% { transform: translateY(0) scaleY(1); }
+    50% { transform: translateY(2px) scaleY(1.1); }
+}
+
+/* Enhanced Cloth Animations with Cinematic Motion */
+.cloth {
+    position: absolute;
+    bottom: -120px;
+    transform-origin: top center;
+    animation: cinematic-flap 4.5s ease-in-out infinite;
+    filter: blur(3px);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Enhanced clothesline-inspired cloth flapping with 3D rotation */
+@keyframes cinematic-flap {
+    0%, 100% { 
+        transform: rotateX(0deg) rotateY(-1deg) rotateZ(-1.5deg) skewX(-3deg) scaleY(1.0) translateX(0) translateZ(0);
+    }
+    12% {
+        transform: rotateX(3deg) rotateY(1deg) rotateZ(1.5deg) skewX(2deg) scaleY(1.02) translateX(3px) translateZ(6px);
+    }
+    25% {
+        transform: rotateX(6deg) rotateY(2deg) rotateZ(3deg) skewX(5deg) scaleY(0.98) translateX(6px) translateZ(12px);
+    }
+    37% {
+        transform: rotateX(4deg) rotateY(1deg) rotateZ(2deg) skewX(3deg) scaleY(1.03) translateX(2px) translateZ(4px);
+    }
+    50% {
+        transform: rotateX(-2deg) rotateY(-2deg) rotateZ(-2deg) skewX(-3deg) scaleY(1.0) translateX(-2px) translateZ(-3px);
+    }
+    62% {
+        transform: rotateX(-5deg) rotateY(-3deg) rotateZ(-4deg) skewX(-6deg) scaleY(0.97) translateX(-5px) translateZ(-8px);
+    }
+    75% {
+        transform: rotateX(-3deg) rotateY(-2deg) rotateZ(-1deg) skewX(-2deg) scaleY(1.02) translateX(-2px) translateZ(-3px);
+    }
+    87% {
+        transform: rotateX(1deg) rotateY(0deg) rotateZ(0.5deg) skewX(0deg) scaleY(1.01) translateX(1px) translateZ(1px);
+    }
+}
+
+.cloth-highlight {
+    position: absolute;
+    top: 0;
+    left: 20%;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+    );
+    animation: highlight-shimmer 8s ease-in-out infinite;
+    filter: blur(2px);
+}
+
+@keyframes highlight-shimmer {
+    0%, 100% { opacity: 0.3; transform: translateX(-10px); }
+    50% { opacity: 0.7; transform: translateX(10px); }
+}
+
+.cloth-1 {
+    left: 20%;
+    height: 150px;
+    width: 90px;
+    border-radius: 0 0 8px 8px;
+    animation-delay: 0s;
+    background: linear-gradient(180deg, rgba(220, 20, 60, 0.85), rgba(200, 10, 50, 0.9));
+    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.cloth-2 {
+    left: 40%;
+    height: 180px;
+    width: 100px;
+    border-radius: 0 0 12px 12px;
+    animation-delay: -1.5s;
+    background: linear-gradient(180deg, rgba(255, 215, 0, 0.9), rgba(240, 200, 0, 0.85));
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.cloth-3 {
+    left: 60%;
+    height: 140px;
+    width: 110px;
+    border-radius: 0 0 10px 10px;
+    animation-delay: -0.5s;
+    background: linear-gradient(180deg, rgba(30, 144, 255, 0.9), rgba(20, 130, 240, 0.85));
+    box-shadow: 0 8px 25px rgba(30, 144, 255, 0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.cloth-4 {
+    left: 55%;
+    height: 160px;
+    width: 95px;
+    border-radius: 0 0 6px 6px;
+    animation-delay: -2.5s;
+    background: linear-gradient(180deg, rgba(220, 20, 60, 0.85), rgba(200, 10, 50, 0.9));
+    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.cloth-5 {
+    left: 70%;
+    height: 170px;
+    width: 90px;
+    border-radius: 0 0 14px 14px;
+    animation-delay: -1s;
+    background: linear-gradient(180deg, rgba(255, 215, 0, 0.9), rgba(240, 200, 0, 0.85));
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+/* Sock-shaped cloth */
+.cloth-5.sock-shape {
+    left: 70%;
+    height: 120px;
+    width: 60px;
+    border-radius: 0 0 30px 30px;
+    animation-delay: -3s;
+    background: linear-gradient(180deg, rgba(30, 144, 255, 0.9), rgba(20, 130, 240, 0.85));
+    box-shadow: 0 8px 25px rgba(30, 144, 255, 0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+/* Towel-shaped cloth */
+.cloth-6.towel-shape {
+    left: 85%;
+    height: 200px;
+    width: 120px;
+    border-radius: 0 0 5px 5px;
+    animation-delay: -4s;
+    background: linear-gradient(180deg, rgba(220, 20, 60, 0.85), rgba(200, 10, 50, 0.9));
+    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.cloth-6 {
+    left: 85%;
+    height: 150px;
+    width: 90px;
+    border-radius: 0 0 12px 12px;
+    animation-delay: -5s;
+    background: linear-gradient(180deg, rgba(255, 240, 240, 0.9), rgba(250, 230, 230, 0.85));
+}
+
+.cloth-7 {
+    left: 88%;
+    height: 180px;
+    width: 100px;
+    border-radius: 0 0 10px 10px;
+    animation-delay: -6s;
+    background: linear-gradient(180deg, rgba(240, 255, 240, 0.9), rgba(230, 250, 230, 0.85));
+}
+
+.cloth-8 {
+    left: 92%;
+    height: 140px;
+    width: 110px;
+    border-radius: 0 0 14px 14px;
+    animation-delay: -7s;
+    background: linear-gradient(180deg, rgba(240, 240, 255, 0.9), rgba(230, 230, 250, 0.85));
+}
+
+.cloth-9 {
+    left: 95%;
+    height: 160px;
+    width: 95px;
+    border-radius: 0 0 8px 8px;
+    animation-delay: -8s;
+    background: linear-gradient(180deg, rgba(255, 255, 240, 0.9), rgba(250, 250, 230, 0.85));
+}
+
+/* Laundry Pegs - more prominent */
+.peg {
+    position: absolute;
+    top: -10px;
+    width: 14px;
+    height: 18px;
+    background: linear-gradient(180deg, 
+        rgba(210, 180, 140, 0.95) 0%,
+        rgba(190, 160, 120, 1) 50%,
+        rgba(170, 140, 100, 0.95) 100%
+    );
+    border-radius: 7px 7px 3px 3px;
+    filter: blur(1px);
+    box-shadow: 
+        0 3px 6px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+    animation: peg-wiggle 6s ease-in-out infinite;
+}
+
+.peg-left {
+    left: 25%;
+}
+
+.peg-right {
+    right: 25%;
+}
+
+.peg-center {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes peg-wiggle {
+    0%, 100% { 
+        transform: rotateZ(0deg) translateY(0);
+    }
+    25% { 
+        transform: rotateZ(1deg) translateY(-1px);
+    }
+    50% { 
+        transform: rotateZ(0deg) translateY(0);
+    }
+    75% { 
+        transform: rotateZ(-1deg) translateY(-0.5px);
+    }
+}
+
+@keyframes enhanced-flap {
+    0%, 100% { 
+        transform: rotate(-1.5deg) skewX(-3deg) scaleY(1.0) translateX(0);
+    }
+    15% {
+        transform: rotate(0.5deg) skewX(1deg) scaleY(1.01) translateX(2px);
+    }
+    30% {
+        transform: rotate(2deg) skewX(4deg) scaleY(0.99) translateX(4px);
+    }
+    45% {
+        transform: rotate(1deg) skewX(2deg) scaleY(1.02) translateX(1px);
+    }
+    60% {
+        transform: rotate(-1deg) skewX(-2deg) scaleY(1.0) translateX(-1px);
+    }
+    75% {
+        transform: rotate(-2deg) skewX(-4deg) scaleY(0.98) translateX(-3px);
+    }
+    90% {
+        transform: rotate(-0.5deg) skewX(-1deg) scaleY(1.01) translateX(-1px);
+    }
+}
+
+/* Old animation kept for compatibility */
+@keyframes photorealistic-flap {
+    0%, 100% { 
+        transform: rotate(-2deg) skewX(-4deg) scaleY(1.0);
+    }
+    25% {
+        transform: rotate(1deg) skewX(2deg) scaleY(1.02);
+    }
+    50% { 
+        transform: rotate(2.5deg) skewX(5deg) scaleY(0.98);
+    }
+    75% {
+        transform: rotate(-1.5deg) skewX(-2deg) scaleY(1.01);
+    }
+}
+
+
+/* --- Gentle Rainy Scene --- */
+
+/* Gentle Rain Clouds */
+.gentle-rain-clouds {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.gentle-cloud {
+    position: absolute;
+    background: rgba(120, 140, 160, 0.5);
+    border-radius: 50%;
+    filter: blur(20px);
+    animation: gentle-drift 40s ease-in-out infinite alternate;
+}
+
+.gentle-cloud.cloud-1 {
+    width: 350px;
+    height: 120px;
+    top: 8%;
+    left: -5%;
+    animation-duration: 35s;
+}
+
+.gentle-cloud.cloud-2 {
+    width: 420px;
+    height: 140px;
+    top: 18%;
+    left: 35%;
+    animation-duration: 50s;
+    animation-delay: -15s;
+}
+
+.gentle-cloud.cloud-3 {
+    width: 300px;
+    height: 100px;
+    top: 28%;
+    left: 65%;
+    animation-duration: 60s;
+    animation-delay: -30s;
+}
+
+@keyframes gentle-drift {
+    0% { 
+        transform: translateX(-15px); 
+        opacity: 0.4;
+    }
+    50% { 
+        opacity: 0.6; 
+    }
+    100% { 
+        transform: translateX(25px); 
+        opacity: 0.5;
+    }
+}
+
+/* Lightning Effects */
+.lightning-container {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.lightning {
+    position: absolute;
+    width: 3px;
+    height: 200px;
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(200, 220, 255, 0.7) 30%,
+        rgba(255, 255, 255, 0.8) 60%,
+        transparent 100%
+    );
+    opacity: 0;
+    filter: blur(1px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.lightning.flash-1 {
+    top: 10%;
+    left: 25%;
+    animation: lightning-flash 8s infinite;
+    transform: rotate(-10deg);
+}
+
+.lightning.flash-2 {
+    top: 15%;
+    right: 30%;
+    animation: lightning-flash 12s infinite;
+    animation-delay: -4s;
+    transform: rotate(15deg);
+}
+
+@keyframes lightning-flash {
+    0%, 90%, 100% { opacity: 0; }
+    91%, 93%, 95% { opacity: 1; }
+    92%, 94% { opacity: 0.3; }
+}
+
+/* Enhanced Rain Layers */
+.rain-layer-far, .rain-layer-mid, .rain-layer-near {
+    position: absolute;
+    inset: 0;
+}
+
+.rain-layer-far { z-index: 3; }
+.rain-layer-mid { z-index: 4; }
+.rain-layer-near { z-index: 5; }
+
+@keyframes gentle-fall {
+  from {
+    transform: translateY(-15vh) translateX(0) scaleY(1);
+  }
+  to {
+    transform: translateY(110vh) translateX(5px) scaleY(1.1);
+  }
+}
+
+.raindrop {
+  position: absolute;
+  top: 0;
+  animation-name: gentle-fall;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+/* Friendly Near layer - fatter, slower, softer */
+.raindrop.near {
+  width: 6px;
+  height: 20px;
+  background: linear-gradient(to bottom, 
+    rgba(160, 160, 160, 0.8) 0%, 
+    rgba(140, 140, 140, 0.9) 50%,
+    rgba(120, 120, 120, 0.7) 100%
+  );
+  opacity: 0.8;
+  filter: blur(1px);
+  box-shadow: 0 0 4px rgba(140, 140, 140, 0.4);
+  animation-duration: 4s;
+}
+
+/* Friendly Mid layer - medium fat drops */
+.raindrop.mid {
+  width: 4px;
+  height: 16px;
+  background: linear-gradient(to bottom, 
+    rgba(160, 160, 160, 0.6) 0%, 
+    rgba(140, 140, 140, 0.7) 50%,
+    rgba(120, 120, 120, 0.5) 100%
+  );
+  opacity: 0.6;
+  filter: blur(1.5px);
+  animation-duration: 5s;
+}
+
+/* Friendly Far layer - small but visible */
+.raindrop.far {
+  width: 3px;
+  height: 12px;
+  background: linear-gradient(to bottom, 
+    rgba(160, 160, 160, 0.4) 0%, 
+    rgba(140, 140, 140, 0.5) 60%,
+    rgba(120, 120, 120, 0.4) 100%
+  );
+  opacity: 0.5;
+  filter: blur(2px);
+  animation-duration: 6s;
+}
+
+/* Gentle Water Splashes */
+.ground-splash-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: 6;
+}
+
+.water-splash {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        rgba(160, 160, 160, 0.5) 0%, 
+        rgba(140, 140, 140, 0.3) 50%,
+        transparent 70%
+    );
+    animation: gentle-splash-effect 6s ease-out infinite;
+}
+
+@keyframes gentle-splash-effect {
+    0% { 
+        transform: scale(0) translateY(0);
+        opacity: 0;
+    }
+    15% { 
+        transform: scale(1) translateY(-3px);
+        opacity: 0.6;
+    }
+    40% { 
+        transform: scale(1.3) translateY(-1px);
+        opacity: 0.4;
+    }
+    100% { 
+        transform: scale(0.8) translateY(0);
+        opacity: 0;
+    }
+}
+
+/* Gentle Rain Overlay */
+.gentle-rain-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(180, 180, 180, 0.05) 0%,
+        rgba(160, 160, 160, 0.08) 50%,
+        rgba(140, 140, 140, 0.06) 100%
+    );
+    z-index: 8;
+}
+
+
+/* --- Enhanced Cloudy/Maybe Scene --- */
+
+/* Partially Hidden Sun */
+.partially-hidden-sun {
+    position: absolute;
+    top: 12%;
+    left: 20%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, 
+        rgba(255, 245, 180, 0.5) 0%, 
+        rgba(255, 240, 150, 0.3) 50%,
+        rgba(255, 253, 240, 0) 80%
+    );
+    border-radius: 50%;
+    filter: blur(20px);
+    opacity: 0.6;
+    animation: hidden-sun-pulse 8s ease-in-out infinite;
+}
+
+.weak-sun-rays {
+    position: absolute;
+    top: -30%;
+    left: -30%;
+    width: 160%;
+    height: 160%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 245, 180, 0.15) 45deg,
+        transparent 90deg,
+        rgba(255, 245, 180, 0.1) 135deg,
+        transparent 180deg,
+        rgba(255, 245, 180, 0.15) 225deg,
+        transparent 270deg,
+        rgba(255, 245, 180, 0.1) 315deg,
+        transparent 360deg
+    );
+    border-radius: 50%;
+    animation: weak-rays-rotate 35s linear infinite;
+    filter: blur(15px);
+}
+
+@keyframes hidden-sun-pulse {
+    0%, 100% { 
+        opacity: 0.4; 
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.7; 
+        transform: scale(1.1);
+    }
+}
+
+@keyframes weak-rays-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Enhanced Mixed Clouds */
+.cloud.large.mixed {
+    background: rgba(180, 190, 200, 0.5);
+    filter: blur(20px);
+    animation-name: uncertain-drift;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.cloud-1.large.mixed { animation-duration: 120s; }
+.cloud-2.large.mixed { animation-duration: 140s; animation-delay: -20s; }
+.cloud-3.large.mixed { animation-duration: 160s; animation-delay: -40s; }
+.cloud-4.large.mixed { animation-duration: 180s; animation-delay: -60s; }
+
+@keyframes uncertain-drift {
+    0% { 
+        transform: translateX(-15vw) scale(1); 
+        opacity: 0.4;
+    }
+    30% { 
+        opacity: 0.6; 
+        transform: translateX(-5vw) scale(1.05);
+    }
+    70% { 
+        opacity: 0.7; 
+        transform: translateX(10vw) scale(0.95);
+    }
+    100% { 
+        transform: translateX(80vw) scale(1); 
+        opacity: 0.5;
+    }
+}
+
+/* Wind Particles */
+.wind-particles {
+    position: absolute;
+    inset: 0;
+}
+
+.wind-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(200, 200, 200, 0.4);
+    border-radius: 50%;
+    animation: wind-drift 15s ease-in-out infinite;
+}
+
+.wind-particle.particle-1 { top: 25%; left: 5%; animation-delay: 0s; }
+.wind-particle.particle-2 { top: 35%; left: 15%; animation-delay: -2s; }
+.wind-particle.particle-3 { top: 45%; left: 8%; animation-delay: -4s; }
+.wind-particle.particle-4 { top: 30%; left: 30%; animation-delay: -1s; }
+.wind-particle.particle-5 { top: 55%; left: 25%; animation-delay: -3s; }
+.wind-particle.particle-6 { top: 20%; left: 50%; animation-delay: -5s; }
+.wind-particle.particle-7 { top: 40%; left: 65%; animation-delay: -2.5s; }
+.wind-particle.particle-8 { top: 50%; left: 75%; animation-delay: -1.5s; }
+.wind-particle.particle-9 { top: 35%; left: 85%; animation-delay: -3.5s; }
+.wind-particle.particle-10 { top: 60%; left: 40%; animation-delay: -4.5s; }
+.wind-particle.particle-11 { top: 28%; left: 70%; animation-delay: -0.5s; }
+.wind-particle.particle-12 { top: 48%; left: 55%; animation-delay: -6s; }
+
+@keyframes wind-drift {
+    0%, 100% { 
+        transform: translateX(0) translateY(0);
+        opacity: 0.2;
+    }
+    25% { 
+        transform: translateX(20px) translateY(-5px);
+        opacity: 0.5;
+    }
+    50% { 
+        transform: translateX(35px) translateY(2px);
+        opacity: 0.7;
+    }
+    75% { 
+        transform: translateX(15px) translateY(-8px);
+        opacity: 0.4;
+    }
+}
+
+/* Uncertain Laundry */
+.uncertain-laundry {
+    position: absolute;
+    top: 55%;
+    left: 0;
+    right: 0;
+    height: 200px;
+    z-index: 5;
+}
+
+.uncertain-cloth {
+    position: absolute;
+    bottom: -140px;
+    width: 80px;
+    height: 130px;
+    background: linear-gradient(180deg, 
+        rgba(220, 220, 220, 0.7) 0%,
+        rgba(200, 200, 200, 0.8) 50%,
+        rgba(180, 180, 180, 0.75) 100%
+    );
+    filter: blur(5px);
+    border-radius: 0 0 6px 6px;
+    transform-origin: top center;
+    animation: uncertain-sway 10s ease-in-out infinite;
+}
+
+.cloth-shadow {
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    right: 10%;
+    height: 20px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.15) 0%, transparent 70%);
+    filter: blur(3px);
+    animation: shadow-shift 10s ease-in-out infinite;
+}
+
+.uncertain-cloth.cloth-1 { 
+    left: 25%; 
+    animation-delay: 0s;
+    background: linear-gradient(180deg, rgba(240, 220, 220, 0.7), rgba(220, 200, 200, 0.75));
+}
+.uncertain-cloth.cloth-2 { 
+    left: 50%; 
+    animation-delay: -3s;
+    background: linear-gradient(180deg, rgba(220, 240, 220, 0.7), rgba(200, 220, 200, 0.75));
+}
+.uncertain-cloth.cloth-3 { 
+    left: 75%; 
+    animation-delay: -6s;
+    background: linear-gradient(180deg, rgba(220, 220, 240, 0.7), rgba(200, 200, 220, 0.75));
+}
+
+@keyframes uncertain-sway {
+    0%, 100% { 
+        transform: rotate(0deg) scaleY(1);
+    }
+    20% { 
+        transform: rotate(1deg) scaleY(1.01);
+    }
+    40% { 
+        transform: rotate(-0.5deg) scaleY(0.99);
+    }
+    60% { 
+        transform: rotate(0.8deg) scaleY(1.02);
+    }
+    80% { 
+        transform: rotate(-0.3deg) scaleY(1);
+    }
+}
+
+@keyframes shadow-shift {
+    0%, 100% { opacity: 0.15; transform: translateX(0); }
+    50% { opacity: 0.25; transform: translateX(3px); }
+}
+
+/* Breeze Indicators */
+.breeze-indicator {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    right: 0;
+    height: 60px;
+}
+
+.breeze-wave {
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 30%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.3) 70%,
+        transparent 100%
+    );
+    border-radius: 1px;
+    animation: breeze-flow 6s ease-in-out infinite;
+    filter: blur(1px);
+}
+
+.breeze-wave.wave-1 { 
+    top: 20px; 
+    left: 20%; 
+    animation-delay: 0s;
+}
+.breeze-wave.wave-2 { 
+    top: 35px; 
+    left: 45%; 
+    animation-delay: -2s;
+}
+.breeze-wave.wave-3 { 
+    top: 25px; 
+    left: 70%; 
+    animation-delay: -4s;
+}
+
+@keyframes breeze-flow {
+    0%, 100% { 
+        opacity: 0.2;
+        transform: translateX(0) scaleX(1);
+    }
+    50% { 
+        opacity: 0.6;
+        transform: translateX(30px) scaleX(1.2);
+    }
+}
+
+/* Compatibility - keep old keyframes */
+.cloud.large {
+    background: rgba(200, 205, 210, 0.6);
+    filter: blur(25px);
+    animation-name: ethereal-drift;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.CloudyScene .cloud-1.large { animation-duration: 150s; }
+.CloudyScene .cloud-2.large { animation-duration: 180s; }
+.CloudyScene .cloud-3.large { animation-duration: 220s; }
+
+@keyframes ethereal-drift {
+    0% { 
+        transform: translateX(-20vw); 
+        opacity: 0.5;
+    }
+    50% { 
+        opacity: 0.7; 
+    }
+    100% { 
+        transform: translateX(100vw); 
+        opacity: 0.5;
+    }
+}
+
+/* ===== GUSTY MCGHEE CHARACTER ANIMATIONS ===== */
+
+/* Gentle bounce for happy Gusty McGhee */
+@keyframes bounce-gentle {
+    0%, 100% { 
+        transform: translateY(0); 
+    }
+    50% { 
+        transform: translateY(-8px); 
+    }
+}
+
+.animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+/* Slow spin for sunshine rays */
+@keyframes spin-slow {
+    from { 
+        transform: rotate(0deg); 
+    }
+    to { 
+        transform: rotate(360deg); 
+    }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+}
+
+/* Floating animation for clean clothes */
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+        opacity: 0.8;
+    }
+    50% { 
+        transform: translateY(-10px) rotate(2deg); 
+        opacity: 1;
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: float 3s ease-in-out infinite;
+    animation-delay: -1s;
+}
+
+.animate-float-slow {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: -2s;
+}
+
+/* Gentle swaying for cautious Gusty McGhee */
+@keyframes sway {
+    0%, 100% { 
+        transform: rotate(-1deg); 
+    }
+    50% { 
+        transform: rotate(1deg); 
+    }
+}
+
+.animate-sway {
+    animation: sway 3s ease-in-out infinite;
+}
+
+/* Rain animation */
+@keyframes rain {
+    0% { 
+        transform: translateY(-5px); 
+        opacity: 0.6;
+    }
+    100% { 
+        transform: translateY(10px); 
+        opacity: 0.3;
+    }
+}
+
+.animate-rain {
+    animation: rain 1.5s ease-in-out infinite;
+}
+
+/* Protective huddle animation */
+@keyframes huddle {
+    0%, 100% { 
+        transform: scale(1); 
+    }
+    50% { 
+        transform: scale(0.98); 
+    }
+}
+
+.animate-huddle {
+    animation: huddle 2.5s ease-in-out infinite;
+}

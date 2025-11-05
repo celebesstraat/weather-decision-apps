@@ -1,0 +1,7 @@
+{
+  "name": "GetTheWashingOut - Weather-Based Home Decision App",
+  "description": "The only app that tells you exactly when to put your washing out and when to bring it in - no more soggy laundry or wasted sunny days.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "@weather-apps/monitoring",
+  "version": "1.0.0",
+  "description": "Monitoring and observability for weather-decision apps",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "web-vitals": "^4.2.4"
+  },
+  "peerDependencies": {
+    "@sentry/react": "^8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@sentry/react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.2",
+    "jest": "^29.7.0",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "monitoring",
+    "performance",
+    "sentry",
+    "web-vitals",
+    "observability"
+  ],
+  "author": "steel + Claude Code",
+  "license": "MIT"
+}
